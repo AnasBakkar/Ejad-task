@@ -1,0 +1,37 @@
+<odoo>
+    <template id="rop_navigation" inherit_id="website.layout" name="Internal ROP links">
+        <xpath expr="//header" position="inside">
+            <nav t-if="request.env.user.has_group('base.group_user')" class="container py-2 d-flex gap-3" aria-label="Stock tools">
+                <a href="/rop">ROP View</a><a href="/rop/realtime">Real-time ROP</a><a href="/shop">Shop</a>
+            </nav>
+        </xpath>
+    </template>
+    <template id="rop_page" name="ROP View">
+        <t t-call="website.layout">
+            <main id="wrap" class="container py-5 ejad-rop" t-att-data-comparison="'&gt;' if realtime else '&lt;'" t-att-data-adjust="'1' if can_adjust else '0'">
+                <h1><t t-esc="'Real-time ROP' if realtime else 'ROP View'"/></h1>
+                <p><t t-esc="warehouse.display_name"/>: stockable product variants with quantity <strong t-esc="'greater than 5' if realtime else 'less than 5'"/>.</p>
+                <p t-if="realtime" class="text-muted">Quantities update automatically every 3 seconds while this page is visible.</p>
+                <p class="ejad-status text-muted" role="status" aria-live="polite">Loading stock…</p>
+                <div class="ejad-products row g-4"/>
+                <div class="d-flex gap-2 mt-4">
+                    <button class="btn btn-outline-secondary ejad-previous" disabled="disabled">Previous</button>
+                    <button class="btn btn-outline-secondary ejad-next" disabled="disabled">Next</button>
+                </div>
+                <dialog class="ejad-dialog border rounded p-4 shadow">
+                    <form class="ejad-adjust-form">
+                        <h2 class="h5">Update Product quantity</h2>
+                        <p class="ejad-product-name"/>
+                        <label for="ejad-quantity" class="form-label">New quantity on hand</label>
+                        <input id="ejad-quantity" name="quantity" class="form-control" type="number" min="0" max="2147483647" step="1" required="required"/>
+                        <p class="ejad-adjust-error text-danger mt-2" role="alert"/>
+                        <div class="d-flex gap-2 mt-3">
+                            <button type="submit" class="btn btn-primary">Apply</button>
+                            <button type="button" class="btn btn-outline-secondary ejad-cancel">Cancel</button>
+                        </div>
+                    </form>
+                </dialog>
+            </main>
+        </t>
+    </template>
+</odoo>

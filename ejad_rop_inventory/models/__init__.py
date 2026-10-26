@@ -1,1 +1,1 @@
-from . import picking, rop_service
+from . import product, picking, rop_service
