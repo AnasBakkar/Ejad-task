@@ -1,0 +1,7 @@
+<templates xml:space="preserve">
+    <t t-name="ejad_rop_pos.CashNowButton">
+        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="onClick" t-att-disabled="state.busy">
+            <i class="fa fa-money me-1"/> Cash now
+        </button>
+    </t>
+</templates>
