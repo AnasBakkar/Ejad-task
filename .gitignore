@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.log
+.local/
+test-results/
+/docs/
+/scripts/
