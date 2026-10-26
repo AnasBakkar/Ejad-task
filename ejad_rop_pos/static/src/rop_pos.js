@@ -34,8 +34,9 @@ async function checkStock(order) {
 
 function customerError(partner) {
     if (!partner) return _t("Select a customer before validating payment.");
-    if (!partner.phone?.trim()) return _t("The customer must have a phone number.");
-    if (!partner.phone.trim().startsWith("+2")) return _t("The customer phone number must start with +2.");
+    const phone = (partner.phone || "").trim();
+    if (!phone) return _t("The customer must have a phone number.");
+    if (!phone.startsWith("+2")) return _t("The customer phone number must start with +2.");
     return null;
 }
 
